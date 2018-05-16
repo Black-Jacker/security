@@ -20,14 +20,14 @@ public class userServiceImpl implements userService {
         String password = user.getPassword();
         String phone = user.getPhone();
 
-        String sql = "insert into user(name, email, password, phone) values(?,?,?,?);";
-        int row = jdbcTemplate.update(sql,name,email,password,phone);
-        if(row == 1){
+        if (queryUserByEmail(email).toString().isEmpty()){
+            String sql = "insert into user(name, email, password, phone) values(?,?,?,?);";
+            int row = jdbcTemplate.update(sql,name,email,password,phone);
             return user;
-        }
-        else {
+        }else {
             return null;
         }
+
     }
 
     @Override
@@ -49,6 +49,9 @@ public class userServiceImpl implements userService {
     public User queryUserByEmail(String Email) {
         String sql = "select * from user where email="+ Email;
         User user = (User)jdbcTemplate.queryForMap(sql);
-        return user;
+        if(user.toString().isEmpty()){
+            return user;
+        }
+        return null;
     }
 }

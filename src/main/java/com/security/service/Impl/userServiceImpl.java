@@ -1,57 +1,53 @@
 package com.security.service.Impl;
 
-import com.security.domain.User;
+import com.security.bean.User;
+import com.security.dao.userDAO;
 import com.security.service.userService;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import java.util.List;
 
-@Service("userService")
+@Service
 public class userServiceImpl implements userService {
 
-    @Resource
-    private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private userDAO userDao;
 
     @Override
-    public User saveUser(User user) {
-        String name = user.getName();
-        String email = user.getEmail();
-        String password = user.getPassword();
-        String phone = user.getPhone();
-
-        if (queryUserByEmail(email).toString().isEmpty()){
-            String sql = "insert into user(name, email, password, phone) values(?,?,?,?);";
-            int row = jdbcTemplate.update(sql,name,email,password,phone);
-            return user;
-        }else {
-            return null;
-        }
-
+    public int saveUser(User user) {
+        return userDao.add(user);
     }
 
     @Override
-    public User updateUser(User user) {
-        return null;
+    public int updateUser(User user) {
+        return userDao.update(user);
     }
 
     @Override
     public int deleteUser(Integer id) {
-        return 0;
+        return userDao.delete(id);
     }
 
     @Override
     public User queryUserById(Integer id) {
-        return null;
+        return userDao.queryById(id);
     }
 
     @Override
-    public User queryUserByEmail(String Email) {
-        String sql = "select * from user where email="+ Email;
-        User user = (User)jdbcTemplate.queryForMap(sql);
-        if(user.toString().isEmpty()){
-            return user;
-        }
-        return null;
+    public User queryUserByEmail(String email){
+        return userDao.queryByEmail(email);
     }
+
+    @Override
+    public List<User> queryAllUser() {
+        return userDao.queryAll();
+    }
+
+    @Override
+    public boolean isExistUserByEmail(String Email) {
+        return userDao.isExistUserByEmail(Email);
+    }
+
+
 }

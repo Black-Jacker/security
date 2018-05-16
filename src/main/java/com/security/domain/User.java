@@ -1,26 +1,16 @@
 package com.security.domain;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
-import javax.persistence.*;
+public class User {
 
-@Table(name="user")
-@Repository
-public class userDAO{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
     private Integer id;
-    @Column(name="name")
+
     private String name;
-    @Column(name="email")
+
     private String email;
-    @Column(name="password")
+
     private String password;
-    @Column(name="phone")
+
     private String phone;
 
 

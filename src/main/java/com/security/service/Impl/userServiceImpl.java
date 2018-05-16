@@ -1,6 +1,6 @@
 package com.security.service.Impl;
 
-import com.security.domain.userDAO;
+import com.security.domain.User;
 import com.security.service.userService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class userServiceImpl implements userService {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public userDAO saveUser(userDAO user) {
+    public User saveUser(User user) {
         String name = user.getName();
         String email = user.getEmail();
         String password = user.getPassword();
@@ -31,7 +31,7 @@ public class userServiceImpl implements userService {
     }
 
     @Override
-    public userDAO updateUser(userDAO user) {
+    public User updateUser(User user) {
         return null;
     }
 
@@ -41,14 +41,14 @@ public class userServiceImpl implements userService {
     }
 
     @Override
-    public userDAO queryUserById(Integer id) {
+    public User queryUserById(Integer id) {
         return null;
     }
 
     @Override
-    public userDAO queryUserByEmail(String Email) {
+    public User queryUserByEmail(String Email) {
         String sql = "select * from user where email="+ Email;
-        userDAO user = (userDAO)jdbcTemplate.queryForMap(sql);
+        User user = (User)jdbcTemplate.queryForMap(sql);
         return user;
     }
 }

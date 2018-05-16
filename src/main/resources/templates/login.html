@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>登录输入sql注入</title>
@@ -15,24 +15,25 @@
 </head>
 
 <body>
-<div style="width:400px;height:600px;margin: 60px auto;">
-    <h3>用户登录</h3>
-    <span></span>
-    <form method="post" action="/login">
-        <div class="input-group">
-            <label>邮箱：</label>
-            <input type="email" name="email" class="form-control" placeholder="email" aria-describedby="basic-addon1">
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-5 column">
+            <form role="form" method="POST" th:action="@{/login}" th:object="${user}">
+
+                <label for="email">Email</label><input type="email" class="form-control" id="email" th:field="*{email}" />
+                <br>
+                <label for="password">Password:</label><input type="password" class="form-control" id="password" th:field="*{password}" />
+                <br>
+                <button type="submit" class="btn btn-default">登录</button>
+            </form>
+
+            <ul class="nav nav-pills">
+                <li role="presentation"><a href="register.html" class="href" target="_blank">Sign up</a></li>
+            </ul>
+
         </div>
-        <br>
-        <div class="input-group">
-            <label>密码：</label>
-            <input type="password" name="password" class="form-control" placeholder="password" aria-describedby="basic-addon1">
-        </div>
-        <br>
-        <div class="input-group">
-            <input type="submit"  class="btn btn-default" value="登录">
-        </div>
-    </form>
+    </div>
 </div>
 
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

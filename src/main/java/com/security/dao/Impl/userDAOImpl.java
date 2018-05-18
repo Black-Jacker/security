@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
+import java.util.Map;
 
 @Repository("userDAO")
 public class userDAOImpl implements userDAO {
@@ -23,21 +24,26 @@ public class userDAOImpl implements userDAO {
         @Override
         public User mapRow(ResultSet rs, int rowNum) throws SQLException{
             User user = new User();
-
-
-            user.setId(rs.getString("id"));
+            user.setId(rs.getInt("id"));
             user.setEmail(rs.getString("email"));
-            user.setNickname(rs.getString("nickname"));
-            user.setPhoneno(rs.getString("phoneno"));
-            user.setPasswd(rs.getString("passwd"));
-            user.setStatus(rs.getString("status"));
+            user.setName(rs.getString("name"));
+            user.setPhone(rs.getString("phone"));
+            user.setPassword(rs.getString("password"));
+
             return user;
         }
     }
 
     @Override
     public int add(User user) {
-        return 0;
+        String name = user.getName();
+        String password = user.getPassword();
+        String phone = user.getPhone();
+        String email = user.getEmail();
+        String sql = "insert into user(name,password,phone,email) values(?,?,?,?)";
+        System.out.println(sql);
+        int r = jdbcTemplate.update(sql,new Object[]{name,password,phone,email});
+        return r;
     }
 
     @Override
@@ -47,17 +53,28 @@ public class userDAOImpl implements userDAO {
 
     @Override
     public int delete(int id) {
-        return 0;
+        String sql = "delete from user where id = ?";
+        System.out.println(sql);
+        int r = jdbcTemplate.update(sql,id);
+        return r;
     }
 
     @Override
     public User queryById(int id) {
+        String sql = "select * from user where id= '"+id+"'";
+        System.out.println(sql);
+        List<User> list = jdbcTemplate.query(sql,new UserRowMapper());
+
+        if (null!=list && !list.isEmpty()){
+            return list.get(0);
+        }
         return null;
     }
 
     @Override
     public User queryByEmail(String email) {
-        String sql = "select * from users where email= '"+email+"'";
+        String sql = "select * from user where email= '"+email+"'";
+        System.out.println(sql);
         List<User> list = jdbcTemplate.query(sql,new UserRowMapper());
 
         if (null!=list && !list.isEmpty()){
@@ -73,7 +90,20 @@ public class userDAOImpl implements userDAO {
 
     @Override
     public boolean isExistUserByEmail(String email) {
-        List<User> list = jdbcTemplate.query("select * from users where email='"+email+"'",new UserRowMapper());
+        String sql = "select * from user where email='"+email+"'";
+        System.out.println(sql);
+        List<User> list = jdbcTemplate.query(sql, new UserRowMapper());
+        if (null!=list && !list.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean verifyByEmailAndPassword(String email, String password) {
+        String sql = "select * from user where email='"+email+"'and password = '"+password+"'";
+        System.out.println(sql);
+        List<User> list = jdbcTemplate.query(sql,new UserRowMapper());
         if (null!=list && !list.isEmpty()){
             return true;
         }

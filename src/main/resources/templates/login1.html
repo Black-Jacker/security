@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>注册成功</title>
+    <title>登录-sql注入1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -20,19 +20,20 @@
 <body>
 <body>
 <div class="container">
-    <div class="row clearfix" style="width: 400px;margin: 50px auto;">
+    <div class="row clearfix" style="width: 400px;margin: 30px auto;">
         <h3 th:text="${title}"></h3>
         <br>
-        <span class="error" th:text="${Exception}"></span>
+        <span class="error" th:text="${error}"></span>
         <br>
         <br>
         <div class="col-4 column">
-            <form role="form" method="POST" th:action="@{/login}" th:object="${user}">
+            <form role="form" method="POST" th:action="@{/login1}" th:object="${user}">
 
-                <label for="email">Email</label><input type="email" placeholder="email" class="form-control" id="email" th:field="*{email}" />
+                <label for="email">Email</label><input type="text" placeholder="email" class="form-control" id="email" th:field="*{email}" />
                 <br>
                 <label for="password">Password:</label><input type="password" placeholder="password" class="form-control" id="password" th:field="*{password}" />
                 <br>
+                <input class="btn btn-default" th:type="submit" th:value="登录">
             </form>
 
         </div>

@@ -49,5 +49,10 @@ public class userServiceImpl implements userService {
         return userDao.isExistUserByEmail(Email);
     }
 
+    @Override
+    public boolean verifyByEmailAndPassword(String email, String password) {
+        return userDao.verifyByEmailAndPassword(email, password);
+    }
+
 
 }

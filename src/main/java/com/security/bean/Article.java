@@ -4,17 +4,29 @@ import java.io.Serializable;
 
 public class Article implements Serializable{
 
-    private String id;
+    private int id;
     private String title;
     private String content;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    private int user_id;
+
+
 
     public String getTitle() {
         return title;

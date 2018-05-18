@@ -21,4 +21,6 @@ public interface userService {
     List<User> queryAllUser();
     // 是否存在用户
     boolean isExistUserByEmail(String Email);
+    // 用email和password判断用户是否存在
+    boolean verifyByEmailAndPassword(String email, String password);
 }

@@ -18,4 +18,6 @@ public interface userDAO{
     public List<User> queryAll();
 
     boolean isExistUserByEmail(String email);
+
+    boolean verifyByEmailAndPassword(String email, String password);
 }

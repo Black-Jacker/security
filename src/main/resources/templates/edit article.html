@@ -30,18 +30,19 @@
                 <label for="title">title</label><input type="text" placeholder="title" class="form-control" id="title" th:field="*{title}" />
                 <input type="hidden" placeholder="title" class="form-control" id="title" th:field="*{user_id}" th:value="${user.id}" />
                 <br>
-                <label for="title">作者:<span th:text="${user.name}"></span></label>
+                <label for="title" class="form-control">作者:<span th:text="${user.name}"></span></label>
                 <br>
                 <label for="content">content:</label>
                 <textarea class="form-control" rows="3" th:field="*{content}" id="content"></textarea>
                 <br>
-                <input class="btn btn-default" th:type="submit" th:value="提交">
+                <input class="btn btn-primary form-control" th:type="submit" th:value="提交">
             </form>
 
         </div>
     </div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </body>
 </html>

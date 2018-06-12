@@ -38,7 +38,9 @@
                         <td th:text="${article.id}"></td>
                         <td><a th:href="@{/article(id=${article.id})}" th:text="${article.title}"></a></td>
 
-                        <td style="max-height:200px;overflow: hidden;" th:utext="${article.content}"></td>
+                        <td >
+                            <div th:utext="${article.content}" style="max-height:50px;overflow: hidden;line-height: 25px; text-overflow: ellipsis;"></div>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -46,6 +48,8 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 </body>
 </html>

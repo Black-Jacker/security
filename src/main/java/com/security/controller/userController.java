@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @EnableAutoConfiguration
@@ -153,6 +154,45 @@ public class userController {
             return "register success";
         }
 
+    }
+
+
+    @GetMapping("/user")
+    public String user(Model model, @RequestParam int id){
+        User user = UserService.queryUserById(id);
+        model.addAttribute("user",user);
+        model.addAttribute("title","用户信息");
+        return "user";
+    }
+
+    @GetMapping("/users")
+    public String user(Model model){
+        List<User> list = UserService.queryAllUser();
+        model.addAttribute("list",list);
+        return "users";
+    }
+
+    @GetMapping("/login")
+    public String getlogin(Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        if(user!=null){
+            return "redirect:/admin";
+        }else {
+            model.addAttribute("user",new User());
+            model.addAttribute("title","g登录");
+            return "login1";
+        }
+    }
+    @PostMapping("/login")
+    public String postlogin(Model model){
+
+        return  "";
+    }
+
+    @GetMapping("/admin")
+    public String admin(Model model){
+        return "admin";
     }
 
 }
